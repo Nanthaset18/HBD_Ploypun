@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💖 ความทรงจำของเรา</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;600;700&family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ec4899;
+            --secondary: #f472b6;
+            --accent: #be185d;
+            --gold: #fbbf24;
+            --bg-start: #fef3c7;
+            --bg-mid: #fce7f3;
+            --bg-end: #e0e7ff;
+            --card-bg: rgba(255, 255, 255, 0.4);
+            --border-radius: 24px;
+            --shadow-light: 0 8px 32px rgba(236, 72, 133, 0.15);
+            --shadow-heavy: 0 20px 60px rgba(236, 72, 133, 0.25);
+            --transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Mali', cursive;
+            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 50%, var(--bg-end) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background Elements */
+        .bg-decoration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--primary);
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-heart:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .floating-heart:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; }
+        .floating-heart:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 4s; }
+        .floating-heart:nth-child(4) { bottom: 10%; right: 5%; animation-delay: 6s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
+            25% { transform: translateY(-20px) rotate(5deg); opacity: 0.3; }
+            50% { transform: translateY(-40px) rotate(-5deg); opacity: 0.2; }
+            75% { transform: translateY(-20px) rotate(3deg); opacity: 0.3; }
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            background: linear-gradient(135deg, var(--accent), var(--primary), var(--secondary), var(--gold));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 4s ease-in-out infinite, glow 3s ease-in-out infinite alternate;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 30px rgba(236, 72, 133, 0.3);
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes glow {
+            0% { filter: drop-shadow(0 0 10px rgba(236, 72, 133, 0.4)); }
+            100% { filter: drop-shadow(0 0 30px rgba(236, 72, 133, 0.8)); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Enhanced Timeline */
+        .timeline-container {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 30px 20px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
+        }
+
+        .timeline::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .timeline::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        .timeline::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .timeline::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+        }
+
+        .timeline-item {
+            flex: 0 0 auto;
+            scroll-snap-align: center;
+            position: relative;
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.8s; }
+        .timeline-item:nth-child(5) { animation-delay: 1.0s; }
+        .timeline-item:nth-child(6) { animation-delay: 1.2s; }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .image-wrapper {
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            width: 280px;
+            height: 380px;
+            position: relative;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .image-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.8s ease;
+            z-index: 1;
+        }
+
+        .image-wrapper:hover::before {
+            transform: translateX(100%);
+        }
+
+        .image-wrapper:hover {
+            transform: translateY(-10px) scale(1.05) rotate(2deg);
+            box-shadow: var(--shadow-heavy);
+            border-color: var(--primary);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: calc(var(--border-radius) - 2px);
+            transition: var(--transition);
+        }
+
+        .image-wrapper:hover img {
+            transform: scale(1.1);
+            filter: brightness(1.1) saturate(1.2);
+        }
+
+        /* Enhanced Back Button */
+        .back-button {
+            margin: 50px auto;
+            display: block;
+            width: fit-content;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, var(--accent), var(--primary), var(--secondary));
+            background-size: 200% 200%;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 60px;
+            text-decoration: none;
+            box-shadow: var(--shadow-heavy);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Prompt', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .back-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .back-button:hover::before {
+            transform: translateX(100%);
+        }
+
+        .back-button:hover {
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 25px 50px rgba(236, 72, 133, 0.4);
+            background-position: 100% 100%;
+        }
+
+        /* Enhanced Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(15px);
+            animation: modalFadeIn 0.4s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 20px;
+            box-shadow: 0 0 80px rgba(236, 72, 133, 0.6);
+            animation: modalZoomIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes modalZoomIn {
+            from { transform: scale(0.8) rotate(-5deg); opacity: 0; }
+            to { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(236, 72, 133, 0.3));
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: bold;
+        }
+
+        .close-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            transform: rotate(180deg) scale(1.2);
+            box-shadow: 0 10px 30px rgba(236, 72, 133, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .timeline {
+                gap: 20px;
+                padding: 20px 10px;
+            }
+            
+            .image-wrapper {
+                width: 220px;
+                height: 300px;
+            }
+            
+            .back-button {
+                padding: 15px 35px;
+                font-size: 1.1rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .loading {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-decoration">
+        <div class="floating-heart">💖</div>
+        <div class="floating-heart">💕</div>
+        <div class="floating-heart">💖</div>
+        <div class="floating-heart">💕</div>
+    </div>
+
+    <div class="header">
+        <h1>💖 อัลบั้มความทรงจำของเรา</h1>
+        <div class="subtitle">✨ เก็บรักไว้ในใจตลอดไป ✨</div>
+    </div>
+
+    <div class="timeline-container">
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/1.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/2.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/3.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/4.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/5.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/6.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+             <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/7.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+             <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/8.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+             <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/9.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+             <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/10.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+             <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/11.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+             <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/12.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+             <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/13.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+             <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/14.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+             <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/15.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+             <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/16.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/17.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="image-wrapper">
+                    <img src="images/18.jpg" alt="ภาพความทรงจำ" class="loading">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="menu.html" class="back-button">🏠 กลับไปหน้าหลัก</a>
+
+    <!-- Enhanced Modal -->
+    <div id="myModal" class="modal">
+        <span class="close-btn">&times;</span>
+        <img class="modal-content" id="imgModal">
+    </div>
+
+    <script>
+        const modal = document.getElementById('myModal');
+        const modalImg = document.getElementById('imgModal');
+        const closeBtn = document.querySelector('.close-btn');
+        const images = document.querySelectorAll('.image-wrapper img');
+
+        // Enhanced modal functionality
+        images.forEach(img => {
+            // Remove loading class when image loads
+            img.addEventListener('load', () => {
+                img.classList.remove('loading');
+            });
+
+            img.addEventListener('click', (e) => {
+                modal.style.display = 'flex';
+                modalImg.src = img.src;
+                document.body.style.overflow = 'hidden';
+                
+                // Add click animation
+                const wrapper = e.target.closest('.image-wrapper');
+                wrapper.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    wrapper.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Close modal functionality
+        const closeModal = () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        };
+
+        closeBtn.onclick = closeModal;
+        modal.onclick = e => e.target === modal && closeModal();
+        document.addEventListener('keydown', e => e.key === 'Escape' && closeModal());
+
+        // Smooth scroll behavior for timeline
+        const timeline = document.querySelector('.timeline');
+        let isScrolling = false;
+
+        timeline.addEventListener('wheel', (e) => {
+            if (!isScrolling) {
+                e.preventDefault();
+                isScrolling = true;
+                timeline.scrollBy({
+                    left: e.deltaY > 0 ? 200 : -200,
+                    behavior: 'smooth'
+                });
+                setTimeout(() => isScrolling = false, 100);
+            }
+        });
+
+        // Add intersection observer for better performance
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe timeline items
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            imageObserver.observe(item);
+        });
+    </script>
+
+</body>
+</html>

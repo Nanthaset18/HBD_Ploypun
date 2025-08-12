@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>เลือกเมนู | วันเกิดที่รัก 💖</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;700&family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background: linear-gradient(135deg, #fff0f5, #ff8a80);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .balloons {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .balloon {
+            position: absolute;
+            width: 30px; height: 40px;
+            border-radius: 50%;
+            box-shadow: inset 0 -8px 0 rgba(0,0,0,0.1);
+            animation: balloonFloat linear infinite;
+        }
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 50px;
+            background: rgba(255,255,255,0.7);
+        }
+        @keyframes balloonFloat {
+            0% { transform: translateY(100vh); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 30px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            max-width: 800px;
+            width: 100%;
+            z-index: 10;
+            border: 3px solid #ffb6c1;
+        }
+
+        h1 {
+            font-family: 'Mali', cursive;
+            font-size: 2.5rem;
+            color: #e91e63;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .menu-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            list-style: none;
+            padding: 0;
+        }
+        .menu-item a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #ffb6c1;
+            color: #e91e63;
+            border: 2px solid #e91e63;
+            padding: 25px;
+            font-size: 1.1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            height: 150px;
+        }
+        .menu-item a:hover {
+            background: #e91e63;
+            color: white;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .menu-item span {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        /* ปรับสำหรับมือถือ */
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px 20px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            p {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+            .menu-list {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .menu-item a {
+                height: 120px;
+                font-size: 1rem;
+                padding: 20px;
+            }
+            .menu-item span {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="balloons" id="balloons"></div>
+
+    <div class="container">
+        <h1>เลือกเมนูวันเกิด 💖</h1>
+        <p>วันนี้เธออยากจะดูอะไรเป็นพิเศษไหม?</p>
+        <ul class="menu-list">
+            <li class="menu-item"><a href="card.html"><span>💌</span>การ์ดวันเกิด</a></li>
+            <li class="menu-item"><a href="gallery.html"><span>📸</span>ภาพความทรงจำ</a></li>
+            <li class="menu-item"><a href="game.html"><span>🎬</span>เกมส์</a></li>
+           
+        </ul>
+    </div>
+
+    <script>
+        const balloons = document.getElementById('balloons');
+        const colors = ['#ff69b4', '#ffb6c1', '#ff1493', '#c71585', '#ffa07a'];
+        for (let i = 0; i < 15; i++) {
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            balloon.style.left = Math.random() * 100 + 'vw';
+            balloon.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            balloon.style.animationDelay = (Math.random() * 15) + 's';
+            balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+            balloons.appendChild(balloon);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+/* ทั่วไป */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fffaf9;
+  color: #5d4037;
+  line-height: 1.6;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  color: white;
+  border-bottom: 5px solid #ffb6c1;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* สไลด์โชว์ */
+.slideshow-container {
+  max-width: 100%;
+  position: relative;
+  margin: 2rem auto;
+}
+
+.slide {
+  display: none;
+  text-align: center;
+}
+
+.slide img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* นับถอยหลัง */
+.countdown {
+  text-align: center;
+  margin: 2rem 1rem;
+  padding: 1.5rem;
+  background: #fff0f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(255, 182, 193, 0.3);
+}
+
+#timer {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #e91e63;
+  margin-top: 1rem;
+}
+
+#timer span {
+  background: #ffebee;
+  padding: 0.5rem 1rem;
+  margin: 0 0.3rem;
+  border-radius: 8px;
+  border: 2px solid #f8bbd0;
+}
+
+/* ลิงก์เมนู */
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.main-nav a {
+  background: #ff80ab;
+  color: white;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: 0.3s;
+  box-shadow: 0 4px 8px rgba(255, 112, 171, 0.3);
+}
+
+.main-nav a:hover {
+  background: #ec407a;
+  transform: translateY(-2px);
+}
+
+/* แกลเลอรี่ */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.photo-item img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.photo-item p {
+  text-align: center;
+  font-style: italic;
+  color: #7d5e51;
+  margin-top: 0.5rem;
+}
+
+.album {
+  margin: 2rem auto;
+  max-width: 1000px;
+}
+
+/* การ์ดข้อความ */
+.message-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 16px rgba(255, 182, 193, 0.2);
+  text-align: center;
+  border: 1px solid #ffe4e1;
+}
+
+.card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ff9a9e;
+  margin-bottom: 0.8rem;
+}
+
+.card h3 {
+  color: #d81b60;
+  margin-bottom: 0.5rem;
+}
+
+/* วิดีโอ */
+.video-container {
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 800px;
+}
+
+video {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+#music-toggle {
+  display: block;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+}
+
+/* รีสปอนซีฟ: รองรับทุกขนาดหน้าจอ */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+  #timer {
+    font-size: 1.4rem;
+  }
+  .main-nav a {
+    font-size: 0.9rem;
+    padding: 0.8rem 1.2rem;
+  }
+  .photo-grid, .message-cards {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+  video {
+    height: auto;
+  }
+}
+
+/* iPad (แนวนอน) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .photo-grid, .message-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .slideshow-container img {
+    max-height: 400px;
+  }
+}
