@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ใส่รหัสผ่าน | วันเกิดที่รัก 💖</title>
     
     <!-- Fonts -->
@@ -19,12 +19,11 @@
             box-sizing: border-box;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: 'Sarabun', 'Inter', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%, #fad0c4 100%);
             background-size: 400% 400%;
             animation: gradientShift 20s ease infinite;
             color: #333;
@@ -33,11 +32,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
-            overflow-x: hidden;
-            position: relative;
-            touch-action: manipulation;
+            overflow: hidden;
+            position: relative; /* For floating hearts */
         }
 
         @keyframes gradientShift {
@@ -46,7 +44,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Floating hearts animation - optimized for mobile */
+        /* Floating hearts animation */
         .floating-hearts {
             position: absolute;
             top: 0;
@@ -60,38 +58,38 @@
 
         .heart {
             position: absolute;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: clamp(0.8rem, 3vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: clamp(1rem, 4vw, 2rem);
             animation: heartFloat linear infinite;
-            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
         }
 
         @keyframes heartFloat {
-            0% { transform: translateY(100vh) rotate(0deg) scale(0.3); opacity: 0; }
-            10% { opacity: 1; transform: translateY(90vh) rotate(15deg) scale(0.5); }
-            50% { transform: translateY(50vh) rotate(180deg) scale(0.8); }
-            90% { opacity: 1; transform: translateY(10vh) rotate(345deg) scale(0.6); }
-            100% { transform: translateY(-50px) rotate(360deg) scale(0.2); opacity: 0; }
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 1; transform: translateY(90vh) rotate(15deg) scale(0.7); }
+            50% { transform: translateY(50vh) rotate(180deg) scale(1); }
+            90% { opacity: 1; transform: translateY(10vh) rotate(345deg) scale(0.8); }
+            100% { transform: translateY(-100px) rotate(360deg) scale(0.3); opacity: 0; }
         }
 
-        /* Main container - Mobile optimized */
+        /* Main container (Glassmorphism effect) */
         .container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: clamp(20px, 5vw, 40px) clamp(15px, 4vw, 30px);
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: clamp(30px, 8vw, 60px) clamp(20px, 6vw, 40px);
+            border-radius: 25px;
             box-shadow:
-                0 15px 35px rgba(0, 0, 0, 0.2),
+                0 25px 50px rgba(0, 0, 0, 0.2),
                 0 0 0 1px rgba(255, 255, 255, 0.5),
                 inset 0 1px 0 rgba(255, 255, 255, 0.8);
-            max-width: 380px;
+            max-width: 450px;
             width: 100%;
             z-index: 10;
-            backdrop-filter: blur(10px);
-            border: 2px solid transparent;
+            backdrop-filter: blur(15px);
+            border: 3px solid transparent;
             background-clip: padding-box;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease-in-out;
+            transition: all 0.5s ease-in-out;
         }
         
         .container::before {
@@ -102,56 +100,54 @@
             right: 0;
             bottom: 0;
             background: linear-gradient(45deg, #ff9a9e, #fecfef, #ffc79f);
-            border-radius: 20px;
-            padding: 2px;
+            border-radius: 25px;
+            padding: 3px;
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask-composite: exclude;
-            -webkit-mask-composite: xor;
             z-index: -1;
-            animation: borderGlow 2s ease infinite alternate;
+            animation: borderGlow 3s ease infinite alternate;
         }
 
         @keyframes borderGlow {
-            0% { opacity: 0.7; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.01); }
+            0% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.02); }
         }
 
-        /* Title styling - Mobile optimized */
+        /* Title styling */
         h1 {
             font-family: 'Mali', cursive;
-            font-size: clamp(2rem, 6vw, 2.8rem);
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
             background: linear-gradient(45deg, #e91e63, #d81b60, #ad1457);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(233, 30, 99, 0.25);
+            text-shadow: 0 4px 15px rgba(233, 30, 99, 0.25);
             user-select: none;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             animation: titleShine 2s ease-in-out infinite alternate;
         }
 
         @keyframes titleShine {
             0% { filter: brightness(1) saturate(1); }
-            100% { filter: brightness(1.1) saturate(1.2); }
+            100% { filter: brightness(1.2) saturate(1.3); }
         }
 
         p {
             color: #555;
-            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
             user-select: none;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-            line-height: 1.4;
         }
 
-        /* Input field styling - Mobile optimized */
+        /* Input field styling */
         #dob-input {
             width: 100%;
-            padding: clamp(12px, 4vw, 18px);
-            font-size: clamp(1.5rem, 5vw, 2rem);
-            letter-spacing: 3px;
-            border: 2px solid transparent;
-            border-radius: 15px;
+            padding: clamp(15px, 5vw, 22px);
+            font-size: clamp(1.8rem, 6vw, 2.4rem);
+            letter-spacing: 5px;
+            border: 3px solid transparent;
+            border-radius: 20px;
             outline: none;
             text-align: center;
             font-family: 'Sarabun', sans-serif;
@@ -159,10 +155,9 @@
                         linear-gradient(45deg, #e91e63, #d81b60) border-box;
             color: #333;
             user-select: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8);
             font-weight: 600;
-            touch-action: manipulation;
         }
 
         #dob-input::placeholder {
@@ -173,33 +168,32 @@
 
         #dob-input:focus {
             transform: scale(1.01);
-            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.2), 0 0 0 3px rgba(233, 30, 99, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            box-shadow: 0 15px 40px rgba(233, 30, 99, 0.25), 0 0 0 4px rgba(233, 30, 99, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
         }
 
-        /* Keypad button styling - Mobile optimized */
+        /* Keypad button styling */
         .keypad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: clamp(10px, 3vw, 15px);
-            margin-top: 18px;
+            gap: 15px;
+            margin-top: 20px;
         }
 
         .keypad button {
             background: linear-gradient(135deg, #ff91ac, #ff6b9d);
             color: white;
             border: none;
-            padding: clamp(12px, 4vw, 20px) 0;
-            font-size: clamp(1.3rem, 4vw, 1.6rem);
-            border-radius: 12px;
+            padding: clamp(15px, 5vw, 25px) 0;
+            font-size: clamp(1.6rem, 5vw, 1.8rem);
+            border-radius: 15px;
             cursor: pointer;
             font-weight: 700;
-            box-shadow: 0 4px 0 #c2185b, 0 8px 15px rgba(194, 24, 91, 0.3);
-            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 0 #c2185b, 0 10px 20px rgba(194, 24, 91, 0.3);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             user-select: none;
             touch-action: manipulation;
             position: relative;
             overflow: hidden;
-            min-height: 48px; /* Minimum touch target size */
         }
 
         .keypad button::before {
@@ -210,26 +204,36 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.4s;
+            transition: left 0.5s;
         }
 
-        .keypad button:active::before { left: 100%; }
+        .keypad button:hover::before { left: 100%; }
+        
+        .keypad button:hover {
+            background: linear-gradient(135deg, #e91e63, #ff1744);
+            transform: translateY(-2px);
+            box-shadow: 0 9px 0 #b0003a, 0 15px 25px rgba(176, 0, 58, 0.4);
+        }
         
         .keypad button:active {
-            background: linear-gradient(135deg, #e91e63, #ff1744);
-            transform: translateY(2px) scale(0.98);
-            box-shadow: 0 2px 0 #b0003a, 0 4px 10px rgba(176, 0, 58, 0.4);
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 #b0003a, 0 5px 15px rgba(176, 0, 58, 0.3);
         }
 
         /* Backspace button style */
         .keypad button.backspace {
             background: linear-gradient(135deg, #c64d4d, #e91e63);
-            box-shadow: 0 4px 0 #9b3d3d, 0 8px 15px rgba(155, 61, 61, 0.3);
+            box-shadow: 0 6px 0 #9b3d3d, 0 10px 20px rgba(155, 61, 61, 0.3);
+        }
+
+        .keypad button.backspace:hover {
+            background: linear-gradient(135deg, #a83d3d, #c62828);
+            box-shadow: 0 9px 0 #7c2d2d, 0 15px 25px rgba(124, 45, 45, 0.4);
         }
 
         .keypad button.backspace:active {
-            background: linear-gradient(135deg, #a83d3d, #c62828);
-            box-shadow: 0 2px 0 #7c2d2d, 0 4px 10px rgba(124, 45, 45, 0.4);
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 #7c2d2d, 0 5px 15px rgba(124, 45, 45, 0.3);
         }
 
         /* Enter button (full width) */
@@ -237,71 +241,75 @@
             grid-column: 1 / 4;
             background: linear-gradient(135deg, #d81b60, #ad1457) !important;
             color: white;
-            padding: clamp(15px, 4vw, 20px) 0;
-            font-size: clamp(1.3rem, 4vw, 1.6rem);
-            box-shadow: 0 6px 0 #6a0d2a, 0 10px 20px rgba(106, 13, 42, 0.4);
-            margin-top: 5px;
+            padding: clamp(15px, 5vw, 22px) 0;
+            font-size: clamp(1.6rem, 5vw, 1.8rem);
+            box-shadow: 0 8px 0 #6a0d2a, 0 12px 25px rgba(106, 13, 42, 0.4);
+        }
+
+        .enter-button:hover {
+            background: linear-gradient(135deg, #ad1457, #880e4f) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 0 #4a092a, 0 20px 35px rgba(74, 9, 42, 0.5);
         }
 
         .enter-button:active {
-            background: linear-gradient(135deg, #ad1457, #880e4f) !important;
-            transform: translateY(2px) scale(0.98);
-            box-shadow: 0 3px 0 #4a092a, 0 5px 10px rgba(74, 9, 42, 0.3);
+            transform: translateY(2px);
+            box-shadow: 0 4px 0 #4a092a, 0 6px 15px rgba(74, 9, 42, 0.3);
         }
 
         /* Error message styling */
         .error {
             color: #d32f2f;
-            margin-top: 12px;
-            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            margin-top: 15px;
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
             opacity: 0;
-            height: 22px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 25px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             user-select: none;
             font-weight: 600;
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
-            transform: translateY(-8px);
+            transform: translateY(-10px);
         }
 
         .error.show {
             opacity: 1;
             transform: translateY(0);
-            animation: errorShake 0.4s ease-in-out;
+            animation: errorShake 0.5s ease-in-out;
         }
 
         @keyframes errorShake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-3px); }
-            75% { transform: translateX(3px); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
         /* Success animation */
         .success-animation {
-            animation: successPulse 0.5s ease-in-out;
+            animation: successPulse 0.6s ease-in-out;
         }
 
         @keyframes successPulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
+            50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
 
-        /* Sparkle animation - Mobile optimized */
+        /* Sparkle animation */
         .sparkle {
             position: fixed;
             color: #ffde00;
-            animation: sparkleAnim 1.2s ease-out forwards;
+            animation: sparkleAnim 1.5s ease-out forwards;
             pointer-events: none;
             z-index: 1000;
-            font-size: clamp(0.8rem, 3vw, 1.2rem);
+            font-size: clamp(1rem, 4vw, 1.5rem);
         }
 
         @keyframes sparkleAnim {
             0% { transform: scale(0) rotate(0deg) translate(0, 0); opacity: 1; }
-            100% { transform: scale(1.2) rotate(360deg) translate(var(--dx), var(--dy)); opacity: 0; }
+            100% { transform: scale(1.5) rotate(360deg) translate(var(--dx), var(--dy)); opacity: 0; }
         }
         
-        /* Modal for success message - Mobile optimized */
+        /* Modal for success message */
         .modal {
             position: fixed;
             top: 0;
@@ -311,12 +319,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 2000;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
-            padding: 20px;
         }
         .modal.show {
             opacity: 1;
@@ -324,14 +331,12 @@
         }
         .modal-content {
             background: white;
-            padding: clamp(25px, 6vw, 40px);
-            border-radius: 18px;
+            padding: 40px;
+            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             transform: scale(0.8);
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            max-width: 320px;
-            width: 100%;
         }
         .modal.show .modal-content {
             transform: scale(1);
@@ -339,60 +344,10 @@
         .modal h2 {
             font-family: 'Mali', cursive;
             color: #d81b60;
-            margin-bottom: 12px;
-            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: 15px;
         }
         .modal p {
             color: #666;
-            font-size: clamp(1rem, 3vw, 1.1rem);
-        }
-
-        /* Mobile-specific optimizations */
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            
-            .container {
-                border-radius: 18px;
-                padding: 18px 15px;
-            }
-            
-            .keypad {
-                gap: 8px;
-            }
-            
-            .keypad button {
-                border-radius: 10px;
-                min-height: 44px;
-            }
-        }
-
-        /* Very small screens */
-        @media (max-width: 320px) {
-            .container {
-                padding: 15px 12px;
-            }
-            
-            #dob-input {
-                letter-spacing: 2px;
-            }
-        }
-
-        /* Landscape mode on mobile */
-        @media (max-height: 600px) and (orientation: landscape) {
-            body {
-                align-items: flex-start;
-                padding-top: 20px;
-            }
-            
-            .container {
-                max-width: 500px;
-            }
-            
-            .floating-hearts {
-                display: none; /* Hide floating hearts in landscape to save performance */
-            }
         }
     </style>
 </head>
@@ -411,18 +366,18 @@
 
         <!-- Numeric keypad -->
         <div class="keypad" role="group" aria-label="แป้นพิมพ์ตัวเลข">
-            <button type="button" aria-label="เลข 1" ontouchstart="" onclick="pressKey('1')">1</button>
-            <button type="button" aria-label="เลข 2" ontouchstart="" onclick="pressKey('2')">2</button>
-            <button type="button" aria-label="เลข 3" ontouchstart="" onclick="pressKey('3')">3</button>
-            <button type="button" aria-label="เลข 4" ontouchstart="" onclick="pressKey('4')">4</button>
-            <button type="button" aria-label="เลข 5" ontouchstart="" onclick="pressKey('5')">5</button>
-            <button type="button" aria-label="เลข 6" ontouchstart="" onclick="pressKey('6')">6</button>
-            <button type="button" aria-label="เลข 7" ontouchstart="" onclick="pressKey('7')">7</button>
-            <button type="button" aria-label="เลข 8" ontouchstart="" onclick="pressKey('8')">8</button>
-            <button type="button" aria-label="เลข 9" ontouchstart="" onclick="pressKey('9')">9</button>
-            <button type="button" class="backspace" aria-label="ลบตัวเลข" ontouchstart="" onclick="pressKey('backspace')">ลบ</button>
-            <button type="button" aria-label="เลข 0" ontouchstart="" onclick="pressKey('0')">0</button>
-            <button type="button" class="enter-button" aria-label="ตกลง" ontouchstart="" onclick="checkPassword()">💖 ตกลง</button>
+            <button type="button" aria-label="เลข 1" onclick="pressKey('1')">1</button>
+            <button type="button" aria-label="เลข 2" onclick="pressKey('2')">2</button>
+            <button type="button" aria-label="เลข 3" onclick="pressKey('3')">3</button>
+            <button type="button" aria-label="เลข 4" onclick="pressKey('4')">4</button>
+            <button type="button" aria-label="เลข 5" onclick="pressKey('5')">5</button>
+            <button type="button" aria-label="เลข 6" onclick="pressKey('6')">6</button>
+            <button type="button" aria-label="เลข 7" onclick="pressKey('7')">7</button>
+            <button type="button" aria-label="เลข 8" onclick="pressKey('8')">8</button>
+            <button type="button" aria-label="เลข 9" onclick="pressKey('9')">9</button>
+            <button type="button" class="backspace" aria-label="ลบตัวเลข" onclick="pressKey('backspace')">ลบ</button>
+            <button type="button" aria-label="เลข 0" onclick="pressKey('0')">0</button>
+            <button type="button" class="enter-button" aria-label="ตกลง" onclick="checkPassword()">💖 ตกลง</button>
         </div>
 
         <!-- Error message display -->
@@ -440,10 +395,7 @@
     <script>
         // JavaScript for handling interactions and animations
 
-        // --- Mobile detection and optimization ---
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        
-        // --- Floating hearts animation (reduced for mobile) ---
+        // --- Floating hearts animation ---
         const floatingHearts = document.getElementById('floating-hearts');
         const heartSymbols = ['💖', '💕', '💗', '💓', '💝', '🌸', '🎀', '✨'];
 
@@ -452,9 +404,9 @@
             heart.classList.add('heart');
             heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 8 + 8) + 's';
-            heart.style.animationDelay = (Math.random() * 3) + 's';
-            heart.style.fontSize = (Math.random() * 0.8 + 0.8) + 'rem';
+            heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            heart.style.animationDelay = (Math.random() * 5) + 's';
+            heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
             floatingHearts.appendChild(heart);
 
             // Remove heart after animation finishes
@@ -462,17 +414,14 @@
                 if (heart && heart.parentNode) {
                     heart.parentNode.removeChild(heart);
                 }
-            }, 16000);
+            }, 20000); // Must be longer than the animation duration
         }
 
-        // Create fewer hearts on mobile for better performance
-        const heartCount = isMobile ? 8 : 12;
-        const heartInterval = isMobile ? 3000 : 2000;
-
-        for (let i = 0; i < heartCount; i++) {
-            setTimeout(createHeart, i * 800);
+        // Create initial hearts and then new ones at an interval
+        for (let i = 0; i < 15; i++) {
+            setTimeout(createHeart, i * 1000);
         }
-        setInterval(createHeart, heartInterval);
+        setInterval(createHeart, 2000);
 
         // --- Password logic and effects ---
         const CORRECT_DOB = "13082544"; // **โปรดเปลี่ยนรหัสผ่านนี้เป็นวันเกิดที่ถูกต้อง**
@@ -482,23 +431,23 @@
         const container = document.querySelector('.container');
         const successModal = document.getElementById('success-modal');
 
-        // Create sparkle effect on click (optimized for mobile)
+        // Create sparkle effect on click
         function createSparkle(x, y) {
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle';
             sparkle.textContent = '✨';
             sparkle.style.left = x + 'px';
             sparkle.style.top = y + 'px';
-            const dx = (Math.random() - 0.5) * (isMobile ? 80 : 120);
-            const dy = (Math.random() - 0.5) * (isMobile ? 80 : 120);
+            const dx = (Math.random() - 0.5) * 150;
+            const dy = (Math.random() - 0.5) * 150;
             sparkle.style.setProperty('--dx', dx + 'px');
             sparkle.style.setProperty('--dy', dy + 'px');
             document.body.appendChild(sparkle);
 
-            setTimeout(() => sparkle.remove(), 1200);
+            setTimeout(() => sparkle.remove(), 1500);
         }
 
-        // Handle keypad button presses with better touch feedback
+        // Handle keypad button presses
         function pressKey(key) {
             let currentInput = dobInput.value;
             errorDiv.classList.remove('show');
@@ -509,19 +458,11 @@
                 dobInput.value = currentInput + key;
             }
 
-            // Haptic feedback for mobile (if supported)
-            if (navigator.vibrate && isMobile) {
-                navigator.vibrate(50);
-            }
-
             // Trigger sparkle effect on the button
             const event = window.event;
             if (event && event.target) {
                 const rect = event.target.getBoundingClientRect();
-                createSparkle(
-                    rect.left + rect.width / 2 + window.scrollX, 
-                    rect.top + rect.height / 2 + window.scrollY
-                );
+                createSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2);
             }
         }
 
@@ -533,113 +474,65 @@
                 // Success animation
                 container.classList.add('success-animation');
 
-                // Haptic feedback for success (mobile)
-                if (navigator.vibrate && isMobile) {
-                    navigator.vibrate([100, 50, 100]);
-                }
-
-                // Create a burst of sparkles (fewer on mobile)
-                const sparkleCount = isMobile ? 12 : 18;
-                for (let i = 0; i < sparkleCount; i++) {
+                // Create a burst of sparkles
+                for (let i = 0; i < 20; i++) {
                     setTimeout(() => {
                         createSparkle(
                             Math.random() * window.innerWidth,
                             Math.random() * window.innerHeight
                         );
-                    }, i * 40);
+                    }, i * 50);
                 }
 
                 // Show success modal
                 setTimeout(() => {
                     successModal.classList.add('show');
-                    
-                     Redirect after showing modal (uncomment when ready)
-                     setTimeout(() => {
-                         window.location.href = 'menu.html';
-                     }, 2000);
-                }, 600);
+                   
+                     window.location.href = 'menu.html';
+                }, 800);
 
             } else {
-                // Error animation with haptic feedback
-                if (navigator.vibrate && isMobile) {
-                    navigator.vibrate(200);
-                }
-                
+                // Error animation
                 errorDiv.classList.add('show');
-                container.style.animation = 'errorShake 0.4s ease-in-out';
-                
+                container.style.animation = 'none';
+                container.offsetHeight; // Trigger reflow
+                container.style.animation = 'errorShake 0.5s ease-in-out';
                 setTimeout(() => {
                     errorDiv.classList.remove('show');
-                    container.style.animation = '';
-                }, 3500);
+                    container.style.animation = null;
+                }, 4000);
             }
         }
 
-        // Add keyboard support for desktop
+        // Add keyboard support
         document.addEventListener('keydown', function (e) {
             if (e.key >= '0' && e.key <= '9') {
-                e.preventDefault();
                 pressKey(e.key);
             } else if (e.key === 'Backspace') {
-                e.preventDefault();
                 pressKey('backspace');
             } else if (e.key === 'Enter') {
-                e.preventDefault();
                 checkPassword();
             }
         });
 
-        // Prevent zoom on double tap for iOS
-        document.addEventListener('touchend', function (event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-
-        let lastTouchEnd = 0;
-
-        // Close modal on tap outside
+        // Add a handler for the modal to close if user clicks outside
         successModal.addEventListener('click', (e) => {
             if (e.target === successModal) {
                 successModal.classList.remove('show');
             }
         });
 
-        // Prevent context menu on long press
-        document.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-        });
-
-        // Enhanced fade in animation on page load
+        // Fade in animation on page load
         window.addEventListener('load', function () {
             container.style.opacity = '0';
-            container.style.transform = 'scale(0.95) translateY(20px)';
+            container.style.transform = 'scale(0.9)';
             
             setTimeout(() => {
-                container.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
                 container.style.opacity = '1';
-                container.style.transform = 'scale(1) translateY(0)';
+                container.style.transform = 'scale(1)';
             }, 100);
         });
-
-        // Optimize performance for mobile
-        if (isMobile) {
-            // Reduce animation complexity on mobile
-            document.addEventListener('visibilitychange', function() {
-                if (document.hidden) {
-                    // Pause animations when tab is hidden
-                    floatingHearts.style.animationPlayState = 'paused';
-                } else {
-                    floatingHearts.style.animationPlayState = 'running';
-                }
-            });
-        }
 
     </script>
 </body>
 </html>
-
-
-
