@@ -6,19 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>การ์ดวันเกิดสุดพิเศษ 💌</title>
 
+    <!-- ป้องกันการ zoom สองครั้งบน iOS -->
     <style>
         /* ฟอนต์ */
         @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap');
 
+        /* ลด animation หากผู้ใช้เปิดโหมดลดการเคลื่อนไหว */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
         * {
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: 'Sarabun', sans-serif;
-            margin: 0;
-            padding: 0;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
             background-size: 400% 400%;
             animation: gradientShift 12s ease infinite;
@@ -27,6 +37,7 @@
             position: relative;
             color: #3e1f47;
             touch-action: manipulation;
+            overscroll-behavior: none;
         }
 
         @keyframes gradientShift {
@@ -35,10 +46,10 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* หัวใจลอย - ปรับสำหรับมือถือ */
+        /* หัวใจลอย */
         .heart {
             position: absolute;
-            font-size: 18px;
+            font-size: 16px;
             color: #ff70a6;
             opacity: 0;
             animation: floatHeart 8s ease-in infinite;
@@ -67,7 +78,7 @@
             }
         }
 
-        /* แสงวิ้ง - ลดความหนาแน่นสำหรับมือถือ */
+        /* แสงวิ้ง */
         .sparkle {
             position: absolute;
             width: 6px;
@@ -93,14 +104,14 @@
             }
         }
 
-        /* ปุ่มซองจดหมาย - ปรับปรุงสำหรับมือถือ */
+        /* ซองจดหมาย - ปรับให้ยืดหยุ่น */
         .envelope-btn {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: min(75vw, 300px);
-            height: min(50vw, 220px);
+            width: min(80vw, 320px);
+            height: min(55vw, 240px);
             background: linear-gradient(135deg, #ff9dd4 0%, #ffc0e7 50%, #ffb3d9 100%);
             border-radius: 25px;
             cursor: pointer;
@@ -124,12 +135,16 @@
             50% { box-shadow: 0 25px 50px rgba(255, 157, 212, 0.8), 0 0 40px rgba(255, 157, 212, 0.7), inset 0 8px 25px rgba(255, 255, 255, 0.5); }
         }
 
-        .envelope-btn::before {
+        .envelope-btn::before,
+        .envelope-btn::after {
             content: '';
             position: absolute;
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
+        }
+
+        .envelope-btn::before {
             width: 45px;
             height: 35px;
             background: linear-gradient(135deg, #ff4081, #e91e63);
@@ -140,10 +155,6 @@
 
         .envelope-btn::after {
             content: '❤️';
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
             font-size: 22px;
             z-index: 1;
             animation: heartPulse 2s infinite;
@@ -183,17 +194,19 @@
             }
         }
 
-        .envelope-btn:active {
+        .envelope-btn:active,
+        .envelope-btn:focus {
             transform: translate(-50%, -50%) scale(0.95);
+            outline: none;
         }
 
-        /* จดหมายใหญ่ (Modal) - ปรับปรุงสำหรับมือถือ */
+        /* จดหมายใหญ่ (Modal) */
         .letter-modal {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(12px);
             display: flex;
@@ -203,7 +216,7 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 20px 15px;
+            padding: 20px 10px;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
@@ -217,10 +230,7 @@
             position: relative;
             width: 100%;
             max-width: 500px;
-            margin: 20px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin: 40px auto;
         }
 
         .letter {
@@ -246,34 +256,17 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .letter::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .letter::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #ff9a9e, #fad0c4);
-            border-radius: 8px;
-            border: 1px solid #fff;
-        }
-
-        .letter::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-        }
-
         .letter h2 {
             font-size: clamp(2rem, 8vw, 2.8rem);
             color: #e91e63;
             margin-bottom: 25px;
             text-shadow: 0 4px 8px rgba(233, 30, 99, 0.3), 0 0 30px rgba(233, 30, 99, 0.2);
             font-weight: 700;
-            user-select: text;
             background: linear-gradient(45deg, #e91e63, #ff6b9d, #c2185b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: shimmer 3s ease-in-out infinite alternate;
-            text-align: center;
             line-height: 1.2;
         }
 
@@ -289,7 +282,6 @@
             line-height: 1.6;
             color: #8b2c6b;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-            user-select: text;
             text-align: left;
             text-indent: 1em;
         }
@@ -307,11 +299,26 @@
             font-size: clamp(1.1rem, 4vw, 1.3rem);
             font-weight: 600;
             text-align: right;
-            user-select: text;
             text-indent: 0;
         }
 
-        /* ปุ่มปิด - ปรับขนาดสำหรับมือถือ */
+        /* Scrollbar */
+        .letter::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .letter::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ff9a9e, #fad0c4);
+            border-radius: 8px;
+            border: 1px solid #fff;
+        }
+
+        .letter::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        /* ปุ่มปิด */
         .close-btn {
             position: absolute;
             top: 15px;
@@ -335,52 +342,15 @@
             z-index: 10;
         }
 
-        .close-btn:active {
+        .close-btn:active,
+        .close-btn:focus {
             background: linear-gradient(135deg, #e91e63, #c2185b);
             transform: scale(0.9);
-            box-shadow: 0 4px 15px rgba(194, 24, 91, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(194, 24, 91, 0.6);
+            outline: none;
         }
 
-        /* เอฟเฟกต์ไฟวิ้งวาว */
-        .letter::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, transparent, rgba(255, 192, 203, 0.5), transparent);
-            border-radius: 22px;
-            z-index: -1;
-            animation: borderGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes borderGlow {
-            0% { opacity: 0.3; }
-            100% { opacity: 0.8; }
-        }
-
-        /* การเคลื่อนไหวเมื่อเปิด */
-        @keyframes letterOpen {
-            0% {
-                transform: scale(0.3) rotateY(180deg);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.05) rotateY(90deg);
-                opacity: 0.7;
-            }
-            100% {
-                transform: scale(1) rotateY(0deg);
-                opacity: 1;
-            }
-        }
-
-        .letter-modal.show .letter {
-            animation: letterOpen 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* ปุ่มกลับไปหน้าเมนู - ปรับปรุงสำหรับมือถือ */
+        /* ปุ่มกลับ */
         .menu-button {
             position: fixed;
             bottom: 20px;
@@ -396,22 +366,22 @@
             border-radius: 50px;
             box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4), inset 0 2px 5px rgba(255, 255, 255, 0.5);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
             display: flex;
             align-items: center;
             gap: 8px;
             user-select: none;
-            min-height: 48px; /* สำหรับ touch target ที่เหมาะสม */
+            min-height: 48px;
         }
 
-        .menu-button:active {
+        .menu-button:active,
+        .menu-button:focus {
             transform: translateX(-50%) scale(0.95);
             background: linear-gradient(90deg, #e91e63, #c2185b, #e91e63);
-            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.6), inset 0 2px 5px rgba(255, 255, 255, 0.7);
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.6);
+            outline: none;
         }
 
         .menu-button svg {
-            color: white;
             width: 20px;
             height: 20px;
             transition: transform 0.3s ease;
@@ -421,128 +391,103 @@
             transform: translateX(-3px);
         }
 
-        /* Media Queries สำหรับหน้าจอเล็กมาก */
+        /* Media Queries */
+
+        /* หน้าจอเล็กมาก */
         @media (max-width: 320px) {
-            .envelope-btn {
-                width: 85vw;
-                height: 55vw;
-            }
-            
-            .letter {
-                padding: 30px 20px 25px;
-                font-size: 1rem;
-            }
-
-            .letter h2 {
-                margin-bottom: 20px;
-            }
-
-            .envelope-text {
-                font-size: 12px;
-                bottom: 15px;
-            }
+            .envelope-btn { width: 85vw; height: 55vw; }
+            .letter { padding: 30px 20px; font-size: 1rem; }
+            .envelope-text { font-size: 12px; bottom: 15px; }
         }
 
-        /* สำหรับหน้าจอสูงมาก (เช่น iPhone X และใหม่กว่า) */
-        @media (max-height: 667px) and (orientation: portrait) {
-            .letter-modal {
-                padding: 10px;
-            }
-            
-            .letter-container {
-                margin: 10px auto;
-            }
-            
-            .letter {
-                max-height: 85vh;
-            }
+        /* หน้าจอสูงมาก (iPhone X+) */
+        @media (max-height: 700px) and (orientation: portrait) {
+            .envelope-btn { transform: translate(-50%, -40%); }
+            .letter-container { margin: 10px auto; }
+            .letter { max-height: 85vh; }
         }
 
-        /* สำหรับโหมด landscape บนมือถือ */
+        /* แนวนอนบนมือถือ */
         @media (orientation: landscape) and (max-height: 500px) {
             .envelope-btn {
                 width: min(40vh, 250px);
                 height: min(30vh, 180px);
+                transform: translate(-50%, -45%);
             }
-            
+            .letter { max-height: 75vh; padding: 25px 20px; }
+            .menu-button { bottom: 10px; padding: 10px 20px; }
+        }
+
+        /* สำหรับ PC หรือหน้าจอใหญ่ */
+        @media (min-width: 768px) {
+            .envelope-btn {
+                width: 300px;
+                height: 220px;
+            }
             .letter {
-                max-height: 75vh;
-                padding: 25px 20px 20px;
+                font-size: 1.2rem;
+                line-height: 1.8;
             }
-            
-            .letter-modal {
-                padding: 10px;
-                align-items: center;
-            }
-            
-            .letter-container {
-                margin: 0 auto;
-            }
-            
-            .menu-button {
-                bottom: 10px;
-                padding: 10px 20px;
+            .envelope-text {
+                font-size: 18px;
             }
         }
 
-        /* ปรับปรุงการ scroll สำหรับ iOS */
+        /* ป้องกันการย่อขยาย */
         @supports (-webkit-touch-callout: none) {
-            .letter-modal {
-                -webkit-overflow-scrolling: touch;
-            }
-            
-            .letter {
-                -webkit-overflow-scrolling: touch;
+            body {
+                -webkit-user-select: none;
+                -webkit-touch-callout: none;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- หัวใจลอย -->
     <div id="hearts"></div>
-    <!-- แสงวิ้ง -->
     <div id="sparkles"></div>
 
-    <!-- ปุ่มซองจดหมาย -->
-    <div class="envelope-btn" id="openLetter" aria-label="เปิดจดหมายวันเกิด" role="button" tabindex="0">
+    <!-- ปุ่มซอง -->
+    <div class="envelope-btn" id="openLetter" role="button" tabindex="0" aria-label="เปิดจดหมายวันเกิด">
         <div class="envelope-text">คลิกเพื่ออ่านจดหมาย 💕</div>
     </div>
 
-    <!-- จดหมายใหญ่ (Modal) -->
-    <div class="letter-modal" id="letterModal" role="dialog" aria-modal="true" aria-labelledby="letterTitle" aria-describedby="letterContent">
+    <!-- จดหมาย Modal -->
+    <div class="letter-modal" id="letterModal" role="dialog" aria-modal="true" aria-labelledby="letterTitle">
         <div class="letter-container">
-            <button class="close-btn" id="closeLetter" aria-label="ปิดจดหมาย">✕</button>
-            <div class="letter" role="document" tabindex="0" id="letterContent">
+            <button class="close-btn" id="closeLetter" aria-label="ปิดจดหมาย">×</button>
+            <div class="letter" id="letterContent" tabindex="0" role="document">
                 <h2 id="letterTitle">สุขสันต์วันเกิดนะที่รัก! 🎉💖</h2>
-
                 <p>ในวันพิเศษนี้ ฉันอยากจะบอกว่าคุณคือ <strong>ของขวัญที่ดีที่สุด</strong> ที่ชีวิตเคยให้มา ✨</p>
-
                 <p>ตลอดเวลาที่เราอยู่ด้วยกัน คุณทำให้ฉันเข้าใจว่าความสุขที่แท้จริงคืออะไร ทุกครั้งที่เห็นรอยยิ้มของคุณ หัวใจฉันก็เต็มไปด้วยความอบอุ่น 💕</p>
-
                 <p>คุณเป็นแสงสว่างในวันที่มืดมิด เป็น <strong>เสียงหัวเราะ</strong> ที่ทำให้ทุกวันสดใส และเป็นแรงบันดาลใจที่ทำให้ฉันอยากเป็นคนดีขึ้นทุกวัน 🌟</p>
-
                 <p>ในปีใหม่ที่จะมาถึงนี้ ฉันอธิษฐานให้ <strong>ความฝันทุกอย่างของคุณเป็นจริง</strong> ให้มีแต่ความสุข ความหวัง และสิ่งดีๆ เข้ามาในชีวิต 🌈</p>
-
                 <p>ขอให้สุขภาพแข็งแรง รอยยิ้มไม่เคยจางหาย และความรักล้อมรอบอยู่เสมอ ❤️</p>
-
                 <p>ขอบคุณที่เป็นส่วนสำคัญในชีวิตฉัน ขอบคุณสำหรับทุกความทรงจำดีๆ และขอให้เราสร้าง <strong>ความทรงจำใหม่ๆ</strong> ที่สวยงามไปด้วยกันอีกมากมาย 🎆</p>
-
                 <div class="signature">
-                    ด้วยรัค และความปรารถนาดี 💝<br>
+                    ด้วยรัก และความปรารถนาดี 💝<br>
                     จากคนที่รักคุณมากที่สุด 🥰
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // ปรับจำนวนเอฟเฟกต์สำหรับมือถือ
-        const isMobile = window.innerWidth <= 768;
-        const heartInterval = isMobile ? 1500 : 1000;
-        const sparkleInterval = isMobile ? 800 : 500;
+    <!-- ปุ่มกลับ -->
+    <a href="menu.html" class="menu-button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5"></path>
+            <path d="M12 19l-7-7 7-7"></path>
+        </svg>
+        <span>กลับไปหน้าเมนู</span>
+    </a>
 
-        // สร้างหัวใจลอย
+    <script>
+        // ตรวจขนาดหน้าจอ
+        const isMobile = window.innerWidth <= 768;
+        const heartInterval = isMobile ? 1800 : 1000; // ลดหัวใจบนมือถือ
+        const sparkleInterval = isMobile ? 1000 : 500;
+
+        // สร้างหัวใจ
         function createHeart() {
             const heart = document.createElement('div');
             heart.className = 'heart';
@@ -552,11 +497,7 @@
             heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
             document.getElementById('hearts').appendChild(heart);
 
-            setTimeout(() => {
-                if (heart.parentNode) {
-                    heart.remove();
-                }
-            }, 8000);
+            setTimeout(() => heart.remove(), 8000);
         }
 
         // สร้างแสงวิ้ง
@@ -568,18 +509,14 @@
             sparkle.style.animationDelay = Math.random() * 2 + 's';
             document.getElementById('sparkles').appendChild(sparkle);
 
-            setTimeout(() => {
-                if (sparkle.parentNode) {
-                    sparkle.remove();
-                }
-            }, 3000);
+            setTimeout(() => sparkle.remove(), 3000);
         }
 
-        // สร้างเอฟเฟกต์อย่างต่อเนื่อง
+        // สร้างเอฟเฟกต์
         setInterval(createHeart, heartInterval);
         setInterval(createSparkle, sparkleInterval);
 
-        // จัดการ Modal
+        // จัดการ modal
         const openLetter = document.getElementById('openLetter');
         const closeLetter = document.getElementById('closeLetter');
         const letterModal = document.getElementById('letterModal');
@@ -587,82 +524,50 @@
         function openModal() {
             letterModal.classList.add('show');
             document.body.style.overflow = 'hidden';
-            // ป้องกันการ scroll ของ background บน iOS
-            document.body.style.position = 'fixed';
-            document.body.style.width = '100%';
         }
 
         function closeModal() {
             letterModal.classList.remove('show');
             document.body.style.overflow = '';
-            document.body.style.position = '';
-            document.body.style.width = '';
         }
 
-        // Event listeners สำหรับ touch และ click
         openLetter.addEventListener('click', openModal);
-        openLetter.addEventListener('touchstart', (e) => {
+        openLetter.addEventListener('touchstart', e => {
             e.preventDefault();
             openModal();
         });
 
         closeLetter.addEventListener('click', closeModal);
-        closeLetter.addEventListener('touchstart', (e) => {
+        closeLetter.addEventListener('touchstart', e => {
             e.preventDefault();
             closeModal();
         });
 
-        // ปิด Modal เมื่อคลิกพื้นหลัง
-        letterModal.addEventListener('click', (e) => {
-            if (e.target === letterModal) {
-                closeModal();
-            }
+        letterModal.addEventListener('click', e => {
+            if (e.target === letterModal) closeModal();
         });
 
-        // รองรับ keyboard
-        openLetter.addEventListener('keydown', (e) => {
+        // Keyboard support
+        openLetter.addEventListener('keydown', e => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 openModal();
             }
         });
 
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', e => {
             if (e.key === 'Escape' && letterModal.classList.contains('show')) {
                 closeModal();
             }
         });
 
-        // จัดการ orientation change
-        window.addEventListener('orientationchange', () => {
-            setTimeout(() => {
-                // รีเฟรช viewport เมื่อหมุนหน้าจอ
-                if (letterModal.classList.contains('show')) {
-                    letterModal.style.height = '100vh';
-                }
-            }, 100);
-        });
-
-        // ป้องกัน double tap zoom บน iOS
+        // ป้องกัน double tap zoom
         let lastTouchEnd = 0;
-        document.addEventListener('touchend', (e) => {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                e.preventDefault();
-            }
+        document.addEventListener('touchend', e => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) e.preventDefault();
             lastTouchEnd = now;
-        }, false);
+        }, { passive: false });
     </script>
-
-    <a href="menu.html" class="menu-button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M19 12H5"></path>
-            <path d="M12 19l-7-7 7-7"></path>
-        </svg>
-        <span class="button-text">กลับไปหน้าเมนู</span>
-    </a>
-
 </body>
-
 </html>
